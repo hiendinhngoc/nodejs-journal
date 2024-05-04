@@ -1,0 +1,5 @@
+20240505	00:21:44	69030b48-de93-4ff7-b7a0-4792878abf25	/new-page.html	GET
+20240505	00:21:46	4a5bcd15-5757-467d-90cd-e6ed7de7ef7f	/css/style.css	GET
+20240505	00:21:46	754feadf-09bd-4992-b733-8e9f577c339d	/img/images.jpeg	GET
+20240505	00:21:46	8bdd1c3e-5e86-4366-abcf-63ed4f798895	/css/style.css	GET
+20240505	00:23:10	266477e4-aab8-4053-b4bb-02195d30bfa1	/new-page.html	GET
