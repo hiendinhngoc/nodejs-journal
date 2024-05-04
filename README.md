@@ -1,6 +1,6 @@
 # Nodejs-journal
 
-This is the notes I take when studing Nodejs follow this [video](https://www.youtube.com/watch?v=f2EqECiTBL8) . My plan is to take one month to cover all the importance aspect of Nodejs.
+This is the notes I take when studing Nodejs follow this [video](https://www.youtube.com/watch?v=f2EqECiTBL8) . My plan is to take one month to cover all the importance aspect of Nodejs. The [learning page](https://nodejs.org/en/learn/getting-started/introduction-to-nodejs) and [offical document](https://nodejs.org/docs/latest/api/) are the resources I use to confirm my understanding of new concepts.
 
 # Content
 

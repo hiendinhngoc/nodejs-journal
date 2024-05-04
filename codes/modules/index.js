@@ -5,6 +5,8 @@
 
 // console.log(uuid());
 
+// The below is code for event emitter, I don't want to set up another node modules folder
+// so I reuse the modules from previous session
 const logEvents = require('./logEvent');
 
 const EventEmitter = require('events');

@@ -15,6 +15,11 @@
     - [Modules in Nodejs (and Javascript)](#why-does-nodejs-or-javascript-need-modules)
   - [appendFile vs writeFile](#what-are-the-differences-between-appendfile-and-writefile-in-node-js)
   - [callback hell](#what-is-callback-hell-in-nodejs)
+  - [fs vs fsPromises when creating directory](#what-are-the-difference-between-fs-and-fspromises-when-creating-directory)
+  - [Pros and Cons of initializing EventEmitter directly vs extending it](#pros-and-cons-of-using-eventemitter-directly-with-extending-it)
+    - [Key differences](#key-differences)
+    - [Practical differences](#practical-differences-and-implications)
+  - [Returned values will be ignored when an EventEmitter object emitting events](#why-do-the-returned-values-be-ignored-when-eventemitter-object-emitting-an-event)
 
 ## Q & A
 
@@ -216,3 +221,113 @@ readFile("file1.txt")
 ```
 
 Using Promises or async/await can make the code more readable and maintainable by flattening the structure and separating error handling.
+
+### What are the difference between `fs` and `fsPromises` when creating directory?
+
+- When you're using the `fs` module's synchronous functions like `fs.mkdir()`, you don't necessarily need to specify the full path using `__dirname`. This is because the synchronous functions operate based on the current working directory of the Node.js process.
+- However, when you're using the `fs.promises` API, which provides asynchronous file system operations using promises, you need to specify the full path because **asynchronous operations don't have access to the current working directory of the Node.js process**. They execute relative to the directory where the script containing the code is located (`__dirname`).
+
+So, with `fs.promises`, if you want to navigate to directories relative to the location of your script, you need to construct the full path manually using `__dirname` and relative paths.
+
+Here's an example illustrating the difference:
+Using fs.existsSync() (synchronous):
+
+```js
+const fs = require("fs");
+const path = require("path");
+
+if (!fs.existsSync(path.join("files/events"))) {
+  fs.mkdirSync(path.join("files/events"), { recursive: true });
+}
+```
+
+Using fs.promises (asynchronous):
+
+```js
+const fsPromises = require("fs").promises;
+const path = require("path");
+
+async function createEventsDir() {
+  const eventsDir = path.join(__dirname, "files", "events");
+  try {
+    await fsPromises.mkdir(eventsDir, { recursive: true });
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+createEventsDir();
+```
+
+### Pros and Cons of using EventEmitter directly with extending it
+
+#### Key differences
+
+In Node.js, the `EventEmitter` class from the events module is a core building block used for handling events. You can use it directly by creating an instance of `EventEmitter`, or you can extend it to create a custom class that inherits EventEmitter's functionality. Both approaches allow you to work with events, but they serve different purposes and have different implications. Here are the key differences between initializing an `EventEmitter` directly versus extending it:
+
+1. Initializing `EventEmitter` directly
+
+```js
+const EventEmitter = require("node:events");
+const eventEmitter = new EventEmitter();
+```
+
+- **Simplicity:** This approach is straightforward and is used when you simply need an object to handle events. It involves less code and is easier to set up.
+- **Use Case:** Ideal for quick tasks, small scripts, or when you need an event handler without additional functionality or properties.
+- **Flexibility:** Direct use of `EventEmitter` does not allow for adding custom methods or properties directly related to event handling unless you attach them separately to the instance.
+
+2. Extending `EventEmitter`
+
+```js
+const EventEmitter = require("node:events");
+class MyEmitter extends EventEmitter {}
+const myEmitter = new MyEmitter();
+```
+
+- **Customization:** By extending `EventEmitter`, you can add custom methods, properties, and behaviors to your class, making it more versatile and tailored to specific needs.
+- **Structure:** This approach is beneficial in larger applications or libraries where you might need a more structured or object-oriented approach. It helps in organizing code better and encapsulating functionality.
+- **Inheritance:** Extending `EventEmitter` allows the custom class to inherit all the event-handling capabilities of EventEmitter, while also being able to define additional functionality or override existing methods.
+
+#### Practical Differences and Implications
+
+- **Encapsulation:** Extending `EventEmitter` allows you to encapsulate related functionality within a class. For example, if you are creating a module that interacts with hardware or manages specific resources, encapsulating event handling with related methods in a single class can make the code cleaner and more maintainable.
+- **Integration:** In object-oriented projects, extending `EventEmitter` makes it easier to integrate event-driven functionality with other parts of the application using inheritance and polymorphism.
+- **Custom Behavior:** When extending `EventEmitter`, you can override its methods (like `emit`, `on`, etc.) to change or enhance how events are handled, logged, or debugged, which is not as straightforward when using `EventEmitter` directly.
+
+Example of customization by extending `EventEmitter`
+
+```js
+const EventEmitter = require("node:events");
+
+class MyEmitter extends EventEmitter {
+  constructor() {
+    super();
+    this.resourceName = "MyResource";
+  }
+
+  logEvent(eventName) {
+    console.log(`Event ${eventName} was emitted on ${this.resourceName}`);
+  }
+
+  emit(eventName, ...args) {
+    super.emit(eventName, ...args);
+    this.logEvent(eventName);
+  }
+}
+
+const myEmitter = new MyEmitter();
+myEmitter.on("test", () => console.log("test event handled"));
+myEmitter.emit("test");
+```
+
+### Why do the returned values be ignored when EventEmitter object emitting an event?
+
+**Context:** _When the EventEmitter object emits an event, all of the functions attached to that specific event are called synchronously. Any values returned by the called listeners are ignored and discarded._ - from Node document
+
+The returned values are ignored because the `EventEmitter` object is designed to work with asynchronous code.
+
+When an event is emitted, the `EventEmitter` object calls all the functions that are listening for that event. These functions are called synchronously, which means that they are executed one after the other, without any delay.
+
+However, the functions that are called by the `EventEmitter` object may return values. These returned values are ignored because the `EventEmitter` object is not designed to handle returned values.
+
+In general, the `EventEmitter` object is used to send events from one part of an application to another part. The events are sent synchronously, and the returned values are ignored.
