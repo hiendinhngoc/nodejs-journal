@@ -8,6 +8,7 @@ This is the notes I take when studing Nodejs follow this [video](https://www.you
 - [Read files](/journal/read_file.md)
 - [npm modules](/journal/npm_modules.md)
 - [Event](/journal/event_emitter.md)
+- [Web server](/journal/web_server.md)
 
 # Extra
 
