@@ -9,6 +9,7 @@ This is the notes I take when studing Nodejs follow this [video](https://www.you
 - [npm modules](/journal/npm_modules.md)
 - [Event](/journal/event_emitter.md)
 - [Web server](/journal/web_server.md)
+- [Express](/journal/express.md)
 
 # Extra
 
