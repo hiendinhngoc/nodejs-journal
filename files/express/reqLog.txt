@@ -1,0 +1,17 @@
+20240529	13:48:53	222ba794-0088-4e15-a889-084d5e05917c	GET	undefined	/
+20240529	13:48:55	adf4d6a9-b851-4123-89cc-fcda82381c58	GET	undefined	/css/style.css
+20240529	13:54:21	04455e7b-d52b-49b0-b799-dab7680cd326	GET	undefined	/
+20240529	13:54:23	67e1b5db-9d77-41b1-8ac7-b598e419f1be	GET	undefined	/css/style.css
+20240529	13:56:09	44d1e0b3-1d5d-43bb-ba27-9ee8f4f47159	GET	https://www.google.com	/
+20240529	13:59:31	7f616130-d1c5-4c8a-a81c-451377e863ef	GET	https://www.google.com	/
+20240529	14:32:03	0b8ca5cc-a177-4132-a7a1-1fe56d827e2a	GET	https://www.google.com	/
+20240529	14:57:38	d1a44e47-7186-4f59-ada9-bf4572481b7d	GET	undefined	/
+20240529	14:57:39	3e73afde-c0bf-4f83-acc6-6820014d46d8	GET	undefined	/favicon.ico
+20240529	14:58:43	35bcc5d6-9df6-4fbc-8b3a-155a8e3b1bcf	GET	undefined	/
+20240529	14:58:45	d576bc6b-150e-499e-ba6a-170bef21b9c7	GET	undefined	/css/style.css
+20240529	15:47:30	416c15a1-a61d-43fc-913e-3e4ed0b64c70	GET	undefined	/
+20240529	15:48:18	3c498440-44ab-4bc7-a75b-29d0fbbf2466	GET	undefined	/
+20240529	15:48:20	c1c9eaa4-032b-4e9c-b42b-5aa672eaf910	GET	undefined	/css/style.css
+20240529	15:57:09	0d8c5dbd-04e0-4ee8-8e54-e2d426bfa670	GET	undefined	/sdf
+20240529	15:59:08	1d7d8240-1864-4127-8608-14a47e03d002	GET	undefined	/sdf
+20240529	15:59:10	e9e54781-a5e6-4d18-8747-fca5d49c2e9b	GET	undefined	/css/style.css
